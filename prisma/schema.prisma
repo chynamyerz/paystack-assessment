@@ -17,11 +17,14 @@ model Category {
 }
 
 model Product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      Float
-  cotegory   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int      @unique
+  id             Int      @id @default(autoincrement())
+  name           String
+  price          Float
+  sku            String   @unique
+  stock          Float
+  expirationDate DateTime
+  cotegory       Category @relation(fields: [categoryId], references: [id])
+  categoryId     Int      @unique
 }
 
 model User {

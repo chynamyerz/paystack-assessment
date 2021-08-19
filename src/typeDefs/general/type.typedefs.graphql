@@ -12,6 +12,9 @@ type Product {
   id: Int!
   name: String!
   price: Float!
+  sku: String!
+  stock: Float
+  expirationDate: String!
   cotegory: Category!
 }
 
