@@ -1,0 +1,43 @@
+{
+  "name": "paystack-assessment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -e ts,graphql -x ts-node -r dotenv/config src/index.ts",
+    "prisma:create": "npx prisma",
+    "prisma:init": "npx prisma init",
+    "prisma:db": "prisma db pull",
+    "prisma:generate": "prisma generate",
+    "prisma:format": "npx prisma format",
+    "prisma:studio": "prisma studio",
+    "prisma:migrate:init": "npx prisma migrate dev --name init",
+    "prisma:migrate:update": "prisma migrate dev --name modified",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chynamyerz/paystack-assessment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chynamyerz/paystack-assessment/issues"
+  },
+  "homepage": "https://github.com/chynamyerz/paystack-assessment#readme",
+  "dependencies": {
+    "@prisma/client": "2.29.1",
+    "@types/node": "^16.6.1",
+    "dotenv": "^10.0.0",
+    "graphql-yoga": "^1.18.3",
+    "prisma": "2.29.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@graphql-tools/load-files": "^6.3.2",
+    "graphql-tools": "^8.1.0",
+    "nodemon": "^2.0.12"
+  }
+}

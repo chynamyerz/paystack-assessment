@@ -1,0 +1,38 @@
+# ***************** Query return types ***************** #
+
+# Category type
+type Category {
+  id: Int!
+  category: String!
+  products: [Product!]!
+}
+
+# Product type
+type Product {
+  id: Int!
+  name: String!
+  price: Float!
+  cotegory: Category!
+}
+
+# User type
+type User {
+  id: Int!
+  email: String!
+  name: String!
+  purchases: [Purchase!]!
+}
+
+# Purchase type
+type Purchase {
+  id: Int
+  createdAt: String!
+  updatedAt: String!
+  user: User!
+}
+
+# Message type
+type Message {
+  # Message
+  message: String!
+}
