@@ -48,11 +48,49 @@ The technology used are as follows:
 
 ### Database schema
 
-Our database will be consisting of 4 tables, namely, `Category`, `Product`, `User`, and `CartProduct`.
+Our database will be consisting of 4 tables: 
+
+1. `Category`
+2. `Product`
+3. `User`
+4. `CartProduct`
 
 The entity relationship is as follows:
 
 1. A Product belongs to a Category
 2. A User can have Product/s
 3. A CartProduct detail the User Product/s in a Cart
+
+This can be visualized in the prisma format as follows:
+
+```prisma
+model Category {
+  id       Int       @id @default(autoincrement())
+  category String    @db.VarChar(255)
+  products Product[]
+}
+
+model Product {
+  id         Int      @id @default(autoincrement())
+  name       String
+  price      Float
+  cotegory   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int      @unique
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  name         String
+  cartProducts CartProduct[]
+}
+
+model CartProduct {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+}
+```
 

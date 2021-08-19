@@ -1,0 +1,10 @@
+# ***************** Enums ***************** #
+
+# Purchase status enum
+enum PurchaseStatus {
+  Active
+  Cancelled
+  Deleted
+  Completed
+  Pending
+}
