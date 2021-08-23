@@ -1,5 +1,5 @@
 import { GraphQLServer, PubSub } from "graphql-yoga";
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 import { default as typeDefs } from "./typeDefs";
 import resolvers from "./resolvers";
 
@@ -21,4 +21,8 @@ const createServer = () => {
   return server;
 };
 
-createServer().start();
+createServer().start(() => {
+  console.log(
+    "Server started successfuly and running at: http://localhost:4000/"
+  );
+});

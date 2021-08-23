@@ -11,30 +11,47 @@ generator client {
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  category String    @db.VarChar(255)
-  products Product[]
+  id       Int               @id @default(autoincrement())
+  category String            @db.VarChar(255)
+  products CategoryProduct[]
 }
 
 model Product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  price      Float
-  cotegory   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int      @unique
+  id             Int               @id @default(autoincrement())
+  name           String
+  price          Float
+  sku            String            @unique
+  stock          Float
+  expirationDate DateTime
+  categories     CategoryProduct[]
+}
+
+model CategoryProduct {
+  id             Int             @id @default(autoincrement())
+  cotegory       Category        @relation(fields: [categoryId], references: [id])
+  categoryId     Int
+  product        Product         @relation(fields: [productId], references: [id])
+  productId      Int
+  productsOnCart ProductOnCart[]
+
+  @@unique([categoryId, productId])
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  email        String        @unique
+  id           Int             @id @default(autoincrement())
+  email        String          @unique
   name         String
-  cartProducts CartProduct[]
+  cartProducts ProductOnCart[]
 }
 
-model CartProduct {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int      @unique
+model ProductOnCart {
+  id                Int             @id @default(autoincrement())
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  quantity          Float
+  totalAmount       Float
+  user              User            @relation(fields: [userId], references: [id])
+  userId            Int
+  categoryProduct   CategoryProduct @relation(fields: [categoryProductId], references: [id])
+  categoryProductId Int
 }
