@@ -13,9 +13,17 @@ type Product {
   name: String!
   price: Float!
   sku: String!
-  stock: Float
+  stock: Float!
   expirationDate: String!
+  categories: [Category!]!
+}
+
+# CategoryProduct type
+type CategoryProduct {
+  id: Int
   cotegory: Category!
+  product: Product!
+  productsOnCart: [ProductOnCart!]!
 }
 
 # User type
@@ -23,17 +31,17 @@ type User {
   id: Int!
   email: String!
   name: String!
-  purchases: [Purchase!]!
+  productsOnCart: [ProductOnCart!]!
 }
 
-# Purchase type
-type Purchase {
-  id: Int
-  createdAt: String!
-  updatedAt: String!
+# ProductOnCart type
+type ProductOnCart {
+  id: Int!
+  quantity: Int!
+  totalAmount: Float!
   user: User!
+  categoryProduct: CategoryProduct!
 }
-
 # Message type
 type Message {
   # Message

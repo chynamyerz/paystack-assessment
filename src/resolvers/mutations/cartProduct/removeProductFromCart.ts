@@ -2,16 +2,19 @@ import { IContext } from "../../types";
 
 export const removeProductFromCartMutation = async (
   _: any,
-  {productId, userId}: {
-    productId: number;
+  {
+    productOnCartId,
+    userId,
+  }: {
+    productOnCartId: number;
     userId: number;
   },
   ctx: IContext
 ) => {
   try {
-    // Product id is required
-    if (!productId) {
-      throw new Error("Product id is required.");
+    // productOnCartId id is required
+    if (!productOnCartId) {
+      throw new Error("Product on cart id is required.");
     }
 
     // User id is required
@@ -19,7 +22,39 @@ export const removeProductFromCartMutation = async (
       throw new Error("User id is required.");
     }
 
-    // TODO: Call actual mutation to the database
+    const product = await ctx.prisma.productOnCart.findUnique({
+      where: { id: productOnCartId },
+      select: {
+        quantity: true,
+        categoryProduct: {
+          select: {
+            product: true,
+          },
+        },
+      },
+    });
+
+    if (!product) {
+      throw new Error(
+        `Product on cart with Id ${productOnCartId} does not exist.`
+      );
+    }
+
+    await ctx.prisma.productOnCart.delete({
+      where: {
+        id: productOnCartId,
+      },
+    });
+
+    // Update stock quantity
+    await ctx.prisma.product.update({
+      where: {
+        id: product.categoryProduct.product.id,
+      },
+      data: {
+        stock: product.categoryProduct.product.stock + product.quantity,
+      },
+    });
 
     return {
       message: "Product removed from cart successfully",

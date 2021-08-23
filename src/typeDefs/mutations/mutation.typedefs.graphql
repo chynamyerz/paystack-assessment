@@ -1,11 +1,18 @@
 type Mutation {
-
   # ********** Add product to cart ********** #
-  addProductToCart(productId: String!, userId: Int!): Message!
+  addProductToCart(
+    categoryProductId: Int!
+    quantity: Int!
+    userId: Int!
+  ): Message!
 
   # ********** Remove product from cart ********** #
-  removeProductFromCart(productId: Int!, userId: Int!): Message!
+  removeProductFromCart(productOnCartId: Int!, userId: Int!): Message!
 
   # ********** Edit product in cart ********** #
-  editProductInCart(productId: Int!, userId: Int!): Message!
+  editProductInCart(
+    productOnCartId: Int!
+    quantity: Int
+    userId: Int!
+  ): Message!
 }
