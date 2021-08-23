@@ -1,5 +1,5 @@
 # TO DO ADD MORE QUERY TYPES
 
 type Query {
-  cartProducts: [Product!]!
+  userProductsOnCart(userId: Int!): [ProductOnCart!]!
 }

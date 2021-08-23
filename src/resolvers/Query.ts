@@ -1,6 +1,10 @@
 import { IContext } from "./types";
-import { cartProductsQuery } from "./queries/cartProduct/cartProducts";
+import { userProductsOnCartQuery } from "./queries/cartProduct/userProductsOnCart";
 
 export default {
-   cartProducts: async (_: any, __: any, ctx: IContext) => cartProductsQuery(_, __, ctx),
+  userProductsOnCart: async (
+    _: any,
+    { userId }: { userId: number },
+    ctx: IContext
+  ) => userProductsOnCartQuery(_, { userId }, ctx),
 };

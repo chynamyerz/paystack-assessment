@@ -8,24 +8,48 @@ export default {
   /**
    * Add product to cart mutation
    */
-   addProductToCart: async (_: any, {productId, userId}: {productId: number; userId: number}, ctx: IContext) => {
-    return addProductToCartMutation(_, {productId, userId}, ctx);
+  addProductToCart: async (
+    _: any,
+    {
+      categoryProductId,
+      quantity,
+      userId,
+    }: { categoryProductId: number; quantity: number; userId: number },
+    ctx: IContext
+  ) => {
+    return addProductToCartMutation(
+      _,
+      { categoryProductId, quantity, userId },
+      ctx
+    );
   },
   /**
    * Edit product in cart mutation
    */
-   editProductInCart: async (_: any, {productId, userId}: {productId: number; userId: number}, ctx: IContext) => {
-    return editProductInCartMutation(_, {productId, userId}, ctx);
+  editProductInCart: async (
+    _: any,
+    {
+      productOnCartId,
+      quantity,
+      userId,
+    }: { productOnCartId: number; quantity: number; userId: number },
+    ctx: IContext
+  ) => {
+    return editProductInCartMutation(
+      _,
+      { productOnCartId, quantity, userId },
+      ctx
+    );
   },
 
   /**
    * Remove product from cart mutation
    */
-   removeProductFromCart: async (
+  removeProductFromCart: async (
     _: any,
-    {productId, userId}: {productId: number; userId: number},
+    { productOnCartId, userId }: { productOnCartId: number; userId: number },
     ctx: IContext
   ) => {
-    return removeProductFromCartMutation(_, {productId, userId}, ctx);
-  }
+    return removeProductFromCartMutation(_, { productOnCartId, userId }, ctx);
+  },
 };
